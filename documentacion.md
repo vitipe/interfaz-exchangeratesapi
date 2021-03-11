@@ -23,4 +23,12 @@ Valor más bajo y su fecha
 El día actual (latest)
 Cualquier día en particular
 Elegir otra base currency
-Rates para un período en particualr
+Rates para un período en particular
+Comparar dos currencies
+Comparar dos currencies para un día específico
+
+
+## TO-DO
+1. Agregar footer
+2. Agregar toggle
+3. Agregar datepicker
