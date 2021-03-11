@@ -1,0 +1,22 @@
+{
+  "name": "interfaz-exchangeratesapi",
+  "version": "1.0.0",
+  "description": "tarea exchangeRateAPI clase 12 r-argentina-programa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitipe/interfaz-exchangeratesapi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vitipe/interfaz-exchangeratesapi/issues"
+  },
+  "homepage": "https://github.com/vitipe/interfaz-exchangeratesapi#readme",
+  "dependencies": {
+    "bootstrap": "^4.6.0"
+  }
+}
