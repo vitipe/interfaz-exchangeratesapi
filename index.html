@@ -15,26 +15,23 @@
     <div class="container">
         <div class="row">
           <div class="col-sm">
-            <h2>All currencies quoted against the euro (base currency)</h2>
+            <h1 id="fecha-actual">Fecha</h1>
           </div>
           <div class="row">
             <div class="col-sm">
-              <h1 id="fecha-actual">Fecha</h1>
+              <h2>All currencies quoted against the euro (base currency)</h2>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-sm">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Currencies
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">USD</a>
-                <a class="dropdown-item" href="#">ARS</a>
-                <a class="dropdown-item" href="#">URU</a>
-              </div>
-            </div>
+            <label>Elija una moneda</label>
+              <select name="monedas" id="monedas">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select>
           </div>
           <div class="col-sm">
             <table class="table">
@@ -49,7 +46,10 @@
                     <th scope="row">USD</th>
                     <td>1.50</td>
                   </tr>
-                <tr>
+                  <tr>
+                    <th scope="row">EUR</th>
+                    <td>1.50</td>
+                  </tr>
           </div>
         </div>
     </div>

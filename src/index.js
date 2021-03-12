@@ -1,8 +1,13 @@
 
-function muestraCurrenciesDelDia() {
+function mostrarCurrenciesDelDia() {
     fetch('https://api.exchangeratesapi.io/latest')
     .then(respuesta => respuesta.json())
-    .then(data => console.log(data))  // despues del arrow le digo que es lo que quiero hacer(crear los elementos de la tabla)
+    .then(dataAPI => { 
+        let arrayRatesKeys = Object.keys(dataAPI.rates);
+        let arrayRatesValues = Object.values(dataAPI.rates)
+        console.log(arrayRatesKeys)
+        console.log(arrayRatesValues)
+    });
 }
 
 function mostrarDiaActual() {
@@ -12,4 +17,4 @@ function mostrarDiaActual() {
 
 mostrarDiaActual();
 
-muestraCurrenciesDelDia();
+mostrarCurrenciesDelDia();

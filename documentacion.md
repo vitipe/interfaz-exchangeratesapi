@@ -7,15 +7,15 @@ Cypress
 jQuery?
 
 ## Layout:
-Título
-Fecha actual de los datos (que la página arranque con un latest)
-Texto diciendo que estan basadas en ${base} unit
-Toggle para elegir la base unit
-Toggle para elegir la fecha
-Toggle para elegir dos fechas diferentes
-Botón para realizar la consulta
+[x] Título
+[x] Fecha actual de los datos (que la página arranque con un latest)
+[x] Texto diciendo que estan basadas en ${base} unit
+[x] Toggle para elegir la base unit
+[] Toggle para elegir la fecha
+[] Toggle para elegir dos fechas diferentes
+[] Botón para realizar la consulta
 
-Estadísticas? tipo:
+# Estadísticas? tipo:
 Valor más alto y su fecha
 Valor más bajo y su fecha
 
@@ -31,4 +31,4 @@ Comparar dos currencies para un día específico
 ## TO-DO
 1. Agregar footer
 2. Agregar toggle
-3. Agregar datepicker
+3. Agregar datepicker (con un calendar o directamente campo de texto y que lo controle con RegEx)
