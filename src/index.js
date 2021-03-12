@@ -5,7 +5,8 @@ function mostrarCurrenciesDelDia(base) {
     .then(dataAPI => { 
         let arrayRatesKeys = Object.keys(dataAPI.rates);
         let arrayRatesValues = Object.values(dataAPI.rates)
-        
+
+        //esto de aca abajo tengo la idea de que lo puedo hacer en un solo forEach, con dataAPI.base y dataAPI.base.values o algo asi
         arrayRatesKeys.forEach((rate, index) => {
             const $tableBody = document.querySelector('tbody');
             let $tableRow = document.createElement('tr');
@@ -26,11 +27,7 @@ function mostrarCurrenciesDelDia(base) {
         })
     });
 }
-
-function mostrarCurrencyElegida(base) {
-
-}
-
+//Puedo sacar el día actual de la API tambien, pero en formato english
 function mostrarDiaActual() {
     let hoy = new Date().toLocaleDateString("es-AR")
     document.querySelector('#fecha-actual').textContent = hoy;
