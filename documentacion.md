@@ -11,9 +11,10 @@ jQuery?
 [x] Fecha actual de los datos (que la página arranque con un latest)
 [x] Texto diciendo que estan basadas en ${base} unit
 [x] Toggle para elegir la base unit
-[] Toggle para elegir la fecha
-[] Toggle para elegir dos fechas diferentes
-[] Botón para realizar la consulta
+[] Funcionamiento para el toggle de base unit
+[] Toggle para elegir la fecha (datepicker)
+[] Toggle para elegir dos fechas diferentes(para elegir periodo)
+[] Botón para realizar la consulta(o que directamente se active al elegir la moneda)
 
 # Estadísticas? tipo:
 Valor más alto y su fecha

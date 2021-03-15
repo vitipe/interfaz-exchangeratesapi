@@ -15,30 +15,27 @@
     <div class="container">
         <div class="row">
           <div class="col-sm">
-            <h1 id="fecha-actual">Fecha</h1>
+            <h1 id="fecha-actual">Fecha de cotización:</h1>
           </div>
           <div class="row">
             <div class="col-sm">
-              <h2>Todas las monedas cotizadas frente al euro (moneda base)</h2>
+              <h2 id="titulo-moneda">Todas las monedas cotizadas frente al Euro (moneda base)</h2>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-sm">
             <label>Moneda base:</label>
-              <select name="monedas" id="monedas">
-                <option value="volvo">EUR</option>
-                <option value="saab">USD</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
+              <select name="monedas" id="selector-monedas">
+                <option value="">--Elija una moneda--</option>
               </select>
           </div>
           <div class="col-sm">
             <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Currency</th>
-                    <th scope="col">Rates</th>
+                    <th scope="col">Moneda</th>
+                    <th scope="col">Cotización</th>
                   </tr>
                 </thead>
                 <tbody>
