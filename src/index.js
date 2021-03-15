@@ -1,5 +1,7 @@
 
 function armarTablaMonedas(base) {
+    borrarNodosTabla();
+
     fetch(`https://api.exchangeratesapi.io/latest?base=${base}`)
     .then(respuesta => respuesta.json())
     .then(dataAPI => { 
@@ -25,35 +27,23 @@ function armarTablaMonedas(base) {
             $tableData.textContent = value;
             $tableData.id = `td-${index}`
             $tableRows[index].appendChild($tableData)
-
         })
+
+        actualizarFechaYTitulo(dataAPI.base)
+
+        
     })
     .catch((error) => {
         console.error('ERROR:', error)
     })
 }
 
-
-function actualizarFechaYTitulo() {
-    fetch(`https://api.exchangeratesapi.io/latest`)
+function actualizarFechaYTitulo(base) {
+    fetch(`https://api.exchangeratesapi.io/latest?base=${base}`)
     .then(respuesta => respuesta.json())
     .then(dataAPI => { 
         document.querySelector('#fecha-actual').textContent = `Fecha de cotización: ${dataAPI.date}`;
         document.querySelector('#titulo-moneda').textContent = `Todas las monedas cotizadas frente al ${dataAPI.base} (moneda base)`;
-    });
-}
-
-function mostrarTablaMonedaElegida(base) {
-    fetch(`https://api.exchangeratesapi.io/latest?base=${base}`)
-    .then(respuesta => respuesta.json())
-    .then(dataAPI => { 
-        let arrayRatesKeys = Object.keys(dataAPI.rates);
-        let arrayRatesValues = Object.values(dataAPI.rates)
-
-        //seleccionar todos los th
-        //seleccionar todos los td
-        //cambiar los valores de todos fetecheando la moneda elegida
-
     });
 }
 
@@ -81,9 +71,28 @@ function armarSelectorMoneda() {
     })
 }
 
+function actualizarMonedaTabla() {
+    let $selector = document.querySelector('#selector-monedas')
+    $selector.onchange = function() {
+        armarTablaMonedas($selector.value)
+    }
+}
 
-actualizarFechaYTitulo();
+function borrarNodosTabla() {
+    let $trTabla = document.querySelectorAll('tbody tr')
+    
+    $trTabla.forEach(nodo => {
+        nodo.remove();
+        
+    })
+}
 
-armarTablaMonedas("EUR");
+
+actualizarFechaYTitulo("EUR");
 
 armarSelectorMoneda();
+
+armarTablaMonedas("EUR")
+
+actualizarMonedaTabla();
+
