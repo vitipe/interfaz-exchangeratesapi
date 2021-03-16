@@ -6,7 +6,7 @@ function manejarTablaMonedas(fecha, base) {
     .then(respuesta => respuesta.json())
     .then(dataAPI => { 
         crearTablaMonedas(dataAPI);
-        actualizarFechaYTitulo(fecha, dataAPI.base)        
+        actualizarFechaYTitulo(dataAPI)        
     })
     .catch((error) => {
         console.error('ERROR:', error)
@@ -57,17 +57,9 @@ function armarSelectorMoneda() {
     })
 }
 
-function actualizarFechaYTitulo(fecha, base) {
-    fetch(`https://api.exchangeratesapi.io/${fecha}?base=${base}`)
-    .then(respuesta => respuesta.json())
-    .then(dataAPI => { 
-        document.querySelector('#fecha-actual').textContent = `Fecha de cotización: ${dataAPI.date}`;
-        document.querySelector('#titulo-moneda').textContent = `Todas las monedas cotizadas frente al ${dataAPI.base} (moneda base)`;
-    });
-}
-
-function actualizarMonedaTabla() {
-    
+function actualizarFechaYTitulo(dataAPI) {
+    document.querySelector('#fecha-actual').textContent = `Fecha de cotización: ${dataAPI.date}`;
+    document.querySelector('#titulo-moneda').textContent = `Todas las monedas cotizadas frente al ${dataAPI.base} (moneda base)`;
 }
 
 function borrarNodosTabla() {
@@ -101,7 +93,5 @@ function manejarInputs() {
 armarSelectorMoneda();
 
 manejarTablaMonedas("latest", "EUR")
-
-actualizarMonedaTabla();
 
 manejarInputs()
