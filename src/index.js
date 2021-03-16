@@ -1,13 +1,21 @@
 
-function armarTablaMonedas(base) {
+function manejarTablaMonedas(fecha, base) {
     borrarNodosTabla();
 
-    fetch(`https://api.exchangeratesapi.io/latest?base=${base}`)
+    fetch(`https://api.exchangeratesapi.io/${fecha}?base=${base}`)
     .then(respuesta => respuesta.json())
     .then(dataAPI => { 
+        crearTablaMonedas(dataAPI);
+        actualizarFechaYTitulo(fecha, dataAPI.base)        
+    })
+    .catch((error) => {
+        console.error('ERROR:', error)
+    })
+}
+
+function crearTablaMonedas(dataAPI) {
         let arrayRatesKeys = Object.keys(dataAPI.rates);
         let arrayRatesValues = Object.values(dataAPI.rates)
-
         //esto de aca abajo tengo la idea de que lo puedo hacer en un solo forEach, con dataAPI.base y dataAPI.base.values o algo asi
         arrayRatesKeys.forEach((rate, index) => {
             const $tableBody = document.querySelector('tbody');
@@ -24,34 +32,12 @@ function armarTablaMonedas(base) {
         arrayRatesValues.forEach((value, index) => {
             const $tableRows = document.querySelectorAll('tbody tr');
             let $tableData = document.createElement('td');
-            $tableData.textContent = value.toFixed(3);
+            $tableData.textContent = value
             $tableData.id = `td-${index}`
             $tableRows[index].appendChild($tableData)
         })
-
-        actualizarFechaYTitulo(dataAPI.base)
-
-        
-    })
-    .catch((error) => {
-        console.error('ERROR:', error)
-    })
 }
 
-function actualizarFechaYTitulo(base) {
-    fetch(`https://api.exchangeratesapi.io/latest?base=${base}`)
-    .then(respuesta => respuesta.json())
-    .then(dataAPI => { 
-        document.querySelector('#fecha-actual').textContent = `Fecha de cotización: ${dataAPI.date}`;
-        document.querySelector('#titulo-moneda').textContent = `Todas las monedas cotizadas frente al ${dataAPI.base} (moneda base)`;
-    });
-}
-
-function cambiarFechaMoneda(fecha) {
-    //hace un fetch con la fecha elegida
-    //cambia el titulo de la fecha
-    //rearma la tabla
-}
 
 function armarSelectorMoneda() {
     fetch('https://api.exchangeratesapi.io/latest')
@@ -71,11 +57,17 @@ function armarSelectorMoneda() {
     })
 }
 
+function actualizarFechaYTitulo(fecha, base) {
+    fetch(`https://api.exchangeratesapi.io/${fecha}?base=${base}`)
+    .then(respuesta => respuesta.json())
+    .then(dataAPI => { 
+        document.querySelector('#fecha-actual').textContent = `Fecha de cotización: ${dataAPI.date}`;
+        document.querySelector('#titulo-moneda').textContent = `Todas las monedas cotizadas frente al ${dataAPI.base} (moneda base)`;
+    });
+}
+
 function actualizarMonedaTabla() {
-    let $selector = document.querySelector('#selector-monedas')
-    $selector.onchange = function() {
-        armarTablaMonedas($selector.value)
-    }
+    
 }
 
 function borrarNodosTabla() {
@@ -88,11 +80,28 @@ function borrarNodosTabla() {
 }
 
 
-actualizarFechaYTitulo("EUR");
+function manejarInputs() {
+    let $selectorMoneda = document.querySelector('#selector-monedas')
+    let $datePicker = document.querySelector('#fecha-cotizacion')
+    
+    $selectorMoneda.onchange = function() {
+        if ($datePicker.value === "") {
+            manejarTablaMonedas("latest", $selectorMoneda.value)
+        } else {
+            manejarTablaMonedas($datePicker.value, $selectorMoneda.value)
+        }
+    }
+    
+    $datePicker.onchange = function() {
+        manejarTablaMonedas($datePicker.value, $selectorMoneda.value)
+    }
+
+}
 
 armarSelectorMoneda();
 
-armarTablaMonedas("EUR")
+manejarTablaMonedas("latest", "EUR")
 
 actualizarMonedaTabla();
 
+manejarInputs()
