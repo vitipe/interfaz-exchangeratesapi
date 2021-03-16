@@ -24,7 +24,7 @@ function armarTablaMonedas(base) {
         arrayRatesValues.forEach((value, index) => {
             const $tableRows = document.querySelectorAll('tbody tr');
             let $tableData = document.createElement('td');
-            $tableData.textContent = value;
+            $tableData.textContent = value.toFixed(3);
             $tableData.id = `td-${index}`
             $tableRows[index].appendChild($tableData)
         })
