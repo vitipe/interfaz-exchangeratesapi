@@ -6,7 +6,8 @@ function manejarDataAPI(fecha, base) {
     .then(respuesta => respuesta.json())
     .then(dataAPI => { 
         actualizarFechaYTitulo(dataAPI);
-        crearTablaMonedas(dataAPI);       
+        crearTablaMonedas(dataAPI);
+        armarSelectorMoneda(dataAPI);       
     })
     .catch((error) => {
         console.error('ERROR:', error)
@@ -52,17 +53,18 @@ function crearTablaMonedas(dataAPI) {
             $tableData.id = `td-${index}`
             $tableRows[index].appendChild($tableData)
         })
-        armarSelectorMoneda(arrayRatesKeys); //Ver si esto tendría que ir acá. Así se aprovecha un sólo llamado a la API.
 }
 
-function armarSelectorMoneda(arrayRatesKeys) {
-        arrayRatesKeys.forEach(rate => {
-            let $selectorMoneda = document.querySelector('#selector-monedas');
-            let $nuevaOptionMoneda = document.createElement('option');
-            $nuevaOptionMoneda.value = rate;
-            $nuevaOptionMoneda.textContent = rate;
-            $selectorMoneda.appendChild($nuevaOptionMoneda);
-        })
+function armarSelectorMoneda(dataAPI) {
+    let arrayRatesKeys = Object.keys(dataAPI.rates);
+        
+    arrayRatesKeys.forEach(rate => {
+        let $selectorMoneda = document.querySelector('#selector-monedas');
+        let $nuevaOptionMoneda = document.createElement('option');
+        $nuevaOptionMoneda.value = rate;
+        $nuevaOptionMoneda.textContent = rate;
+        $selectorMoneda.appendChild($nuevaOptionMoneda);
+    })
 }
 
 function actualizarFechaYTitulo(dataAPI) {
