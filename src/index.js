@@ -1,13 +1,15 @@
+//arreglar que el max siempre va cambiando (no hardcodearlo pero ver como hacer para que lo tome la primera vez y listo)
+//arreglar que no se dupliquen los options del selector (sacarlo al carajo del dom y hardcodearlo mepa)
 
 function manejarDataAPI(fecha, base) {
     borrarNodosTabla();
-
+    console.log(fecha, base)
     fetch(`https://api.exchangeratesapi.io/${fecha}?base=${base}`)
     .then(respuesta => respuesta.json())
-    .then(dataAPI => { 
+    .then(dataAPI => {
+        armarSelectorMoneda(dataAPI);
         actualizarFechaYTitulo(dataAPI);
         crearTablaMonedas(dataAPI);
-        armarSelectorMoneda(dataAPI);       
     })
     .catch((error) => {
         console.error('ERROR:', error)
@@ -56,21 +58,44 @@ function crearTablaMonedas(dataAPI) {
 }
 
 function armarSelectorMoneda(dataAPI) {
-    let arrayRatesKeys = Object.keys(dataAPI.rates);
-        
-    arrayRatesKeys.forEach(rate => {
+    
+    if (document.querySelectorAll('option').length === 0) {
+        let arrayRatesKeys = Object.keys(dataAPI.rates);
         let $selectorMoneda = document.querySelector('#selector-monedas');
-        let $nuevaOptionMoneda = document.createElement('option');
-        $nuevaOptionMoneda.value = rate;
-        $nuevaOptionMoneda.textContent = rate;
-        $selectorMoneda.appendChild($nuevaOptionMoneda);
-    })
+        let $optionDefaultMoneda = document.createElement('option');
+        let $optionEURMoneda = document.createElement('option');
+        $optionDefaultMoneda.value = "";
+        $optionDefaultMoneda.textContent = "--Elija una moneda--";
+        $optionEURMoneda.value = "EUR"
+        $optionEURMoneda.textContent = "EUR"
+        $selectorMoneda.appendChild($optionDefaultMoneda);
+        $selectorMoneda.appendChild($optionEURMoneda);
+
+        arrayRatesKeys.forEach(rate => {
+            let $nuevaOptionMoneda = document.createElement('option');
+            $nuevaOptionMoneda.value = rate;
+            $nuevaOptionMoneda.textContent = rate;
+            $selectorMoneda.appendChild($nuevaOptionMoneda);
+        })
+    }
 }
 
 function actualizarFechaYTitulo(dataAPI) {
+    
+    if (document.querySelector('#fecha-cotizacion').max ===  "") {
+        document.querySelector('#fecha-cotizacion').max = dataAPI.date;
+    }
+
     document.querySelector('#fecha-actual').textContent = `Fecha de cotización: ${dataAPI.date}`;
-    document.querySelector('#fecha-cotizacion').max = dataAPI.date; //Con esto limita fecha máxima del datePicker a la fecha del fecth del día actual
     document.querySelector('#titulo-moneda').textContent = `Todas las monedas cotizadas frente al ${dataAPI.base} (moneda base)`;
+}
+
+function borrarOptionsMoneda() {
+    let $optionsMoneda = document.querySelectorAll('option')
+    
+    $optionsMoneda.forEach(nodo => {
+        nodo.remove();
+    })
 }
 
 function borrarNodosTabla() {
