@@ -1,5 +1,3 @@
-//arreglar que el max siempre va cambiando (no hardcodearlo pero ver como hacer para que lo tome la primera vez y listo)
-//arreglar que no se dupliquen los options del selector (sacarlo al carajo del dom y hardcodearlo mepa)
 
 function manejarDataAPI(fecha, base) {
     borrarNodosTabla();
@@ -88,14 +86,6 @@ function actualizarFechaYTitulo(dataAPI) {
 
     document.querySelector('#fecha-actual').textContent = `Fecha de cotización: ${dataAPI.date}`;
     document.querySelector('#titulo-moneda').textContent = `Todas las monedas cotizadas frente al ${dataAPI.base} (moneda base)`;
-}
-
-function borrarOptionsMoneda() {
-    let $optionsMoneda = document.querySelectorAll('option')
-    
-    $optionsMoneda.forEach(nodo => {
-        nodo.remove();
-    })
 }
 
 function borrarNodosTabla() {
