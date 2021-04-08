@@ -64,7 +64,7 @@ function crearTablaMonedas(dataAPI) {
 function manejarDataAPI(fecha, base) {
   borrarNodosTabla();
 
-  fetch(`https://api.exchangeratesapi.io/${fecha}?base=${base}`)
+  fetch(`https://api.ratesapi.io/api/${fecha}?base=${base}`)
     .then((respuesta) => respuesta.json())
     .then((dataAPI) => {
       armarSelectorMoneda(dataAPI);
