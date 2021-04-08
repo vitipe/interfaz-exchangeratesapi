@@ -22,5 +22,10 @@
     "jQuery": "^1.7.4",
     "jquery": "^3.6.0",
     "popper.js": "^1.14.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
   }
 }
