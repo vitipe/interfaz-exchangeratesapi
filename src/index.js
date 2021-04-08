@@ -1,15 +1,11 @@
 function armarSelectorMoneda(dataAPI) {
   if (document.querySelectorAll('option').length === 0) {
-    const arrayRatesKeys = Object.keys(dataAPI.rates);
+    const arrayRatesKeys = Object.keys(dataAPI.rates).concat('EUR').sort();
     const $selectorMoneda = document.querySelector('#selector-monedas');
     const $optionDefaultMoneda = document.createElement('option');
-    const $optionEURMoneda = document.createElement('option');
     $optionDefaultMoneda.value = '';
     $optionDefaultMoneda.textContent = '--Elija una moneda--';
-    $optionEURMoneda.value = 'EUR';
-    $optionEURMoneda.textContent = 'EUR';
     $selectorMoneda.appendChild($optionDefaultMoneda);
-    $selectorMoneda.appendChild($optionEURMoneda);
 
     arrayRatesKeys.forEach((rate) => {
       const $nuevaOptionMoneda = document.createElement('option');
