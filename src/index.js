@@ -1,17 +1,15 @@
-import fetchearDataApi from './exchange.js';
+import fetchearDataAPI from './exchange.js'; // Cuando importás defaults viene sin curly braces
 
-import {
-  actualizarFechaYTitulo, borrarNodosTabla, crearTablaMonedas, armarSelectorMoneda, manejarInputs,
-} from './ui.js';
+import * as ui from './ui.js'; // "ui" pasaría a ser un objeto que tiene las funciones como propiedades
+
+import manejarInputs from './cambios.js';
 
 async function manejarTodo(fecha, base) {
-  borrarNodosTabla();
-  let dataAPI = await fetchearDataApi(fecha, base);
-  actualizarFechaYTitulo(dataAPI);
-  armarSelectorMoneda(dataAPI);
-  crearTablaMonedas(dataAPI);
+  const dataAPI = await fetchearDataAPI(fecha, base);
+  ui.actualizarFechaYTitulo(dataAPI);
+  ui.armarSelectorMoneda(dataAPI);
+  ui.crearTablaMonedas(dataAPI);
+  manejarInputs();
 }
 
 manejarTodo('latest', 'EUR');
-
-manejarInputs(); // No me estaría andando esto, refactorizarlo

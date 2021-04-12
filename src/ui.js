@@ -7,7 +7,7 @@ export function actualizarFechaYTitulo(dataAPI) {
   document.querySelector('#titulo-moneda').textContent = `Todas las monedas cotizadas frente al ${dataAPI.base} (moneda base)`;
 }
 
-export function borrarNodosTabla() {
+export function limpiarTabla() {
   const $trTabla = document.querySelectorAll('tbody tr');
 
   $trTabla.forEach((nodo) => {
@@ -55,21 +55,4 @@ export function armarSelectorMoneda(dataAPI) {
       $selectorMoneda.appendChild($nuevaOptionMoneda);
     });
   }
-}
-
-export function manejarInputs() {
-  const $selectorMoneda = document.querySelector('#selector-monedas');
-  const $datePicker = document.querySelector('#fecha-cotizacion');
-
-  $selectorMoneda.onchange = () => {
-    if ($datePicker.value === '') {
-      manejarTodo('latest', $selectorMoneda.value);
-    } else {
-      manejarTodo($datePicker.value, $selectorMoneda.value);
-    }
-  };
-
-  $datePicker.onchange = () => {
-    manejarTodo($datePicker.value, $selectorMoneda.value);
-  };
 }
